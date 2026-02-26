@@ -1,0 +1,23 @@
+{
+  "name": "trends-scraper",
+  "version": "1.0.0",
+  "description": "Google Trends 크론 작업",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build needed'",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "pg": "^8.11.0",
+    "dotenv": "^16.0.0",
+    "duckduckgo-api": "^0.0.4"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
