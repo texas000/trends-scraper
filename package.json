@@ -11,8 +11,7 @@
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",
     "pg": "^8.11.0",
-    "dotenv": "^16.0.0",
-    "duckduckgo-api": "^0.0.4"
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "vercel": "^33.0.0"
