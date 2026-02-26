@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-const { 
-  getRecentTrends, 
+const {
+  getRecentTrends,
   getTodayTrends,
   getTrendsByCountry,
   getRecentTrendsByAllCountries
-} = require('../../lib/db');
+} = require('../lib/db');
 
 /**
  * 저장된 트렌드 조회 API (다국어 지원)
@@ -16,7 +16,7 @@ const {
  * GET /api/trends?period=today&country=JP
  * GET /api/trends?limit=50
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const { country = null, period = 'recent', limit = 20 } = req.query;
 

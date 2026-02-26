@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-const { 
+const {
   getSearchResultsByKeyword,
   getTrendWithSearchResults
-} = require('../../lib/db');
+} = require('../lib/db');
 
 /**
  * 검색 결과 조회 API
@@ -12,7 +12,7 @@ const {
  * GET /api/search-results?country=KR
  * GET /api/search-results?keyword=검색어&limit=10
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const { keyword = null, country = null, limit = 20 } = req.query;
 

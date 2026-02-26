@@ -1,12 +1,12 @@
 require('dotenv').config();
 
-const { getSupportedCountries } = require('../../lib/trends-scraper');
+const { getSupportedCountries } = require('../lib/trends-scraper');
 
 /**
  * 지원하는 국가 목록 조회 API
  * GET /api/countries
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const countries = getSupportedCountries();
 

@@ -1,15 +1,15 @@
 require('dotenv').config();
 
-const { getTrendingSearchesByCountries, getSupportedCountries } = require('../../lib/trends-scraper');
-const { searchMultipleKeywords } = require('../../lib/search-api');
-const { initializeDatabase, saveTrends, saveSearchResults } = require('../../lib/db');
+const { getTrendingSearchesByCountries, getSupportedCountries } = require('../lib/trends-scraper');
+const { searchMultipleKeywords } = require('../lib/search-api');
+const { initializeDatabase, saveTrends, saveSearchResults } = require('../lib/db');
 
 /**
  * 수동으로 크론을 실행하기 위한 엔드포인트 (다국어 + 검색 지원)
  * GET /api/trigger-trends?secret=YOUR_SECRET&countries=KR,US,JP
  * GET /api/trigger-trends?secret=YOUR_SECRET (기본값: KR,US,JP)
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // 보안: 쿼리 파라미터로 전달된 시크릿 확인
   const secret = req.query.secret;
   const cronSecret = process.env.CRON_SECRET || 'development-secret';
