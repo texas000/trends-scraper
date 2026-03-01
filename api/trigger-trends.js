@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const { getTrendingSearchesByCountries, getSupportedCountries } = require('../lib/trends-scraper');
-const { searchMultipleKeywords } = require('../lib/search-api');
+const { getTrendingSearchesByCountries, SUPPORTED_COUNTRIES } = require('../lib/trends-scraper');
+const { searchMultipleGoogleNews } = require('../lib/search-api');
 const { initializeDatabase, saveTrends, saveSearchResults } = require('../lib/db');
 
 /**
@@ -44,10 +44,13 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // 모든 국가의 데이터를 평탄화
+    // 모든 국가의 데이터를 평탄화하고 국가별로 정리
     const allTrends = [];
-    Object.values(trendsData).forEach(countryTrends => {
+    const trendsByCountry = {};
+
+    Object.entries(trendsData).forEach(([countryCode, countryTrends]) => {
       allTrends.push(...countryTrends);
+      trendsByCountry[countryCode] = countryTrends;
     });
 
     console.log(`📈 총 ${allTrends.length}개 트렌드 수집됨 (${Object.keys(trendsData).length}개 국가)`);
@@ -57,16 +60,32 @@ module.exports = async function handler(req, res) {
     const trendResult = await saveTrends(allTrends);
     const trendIds = trendResult.trendIds;
 
-    // 4. 각 검색어를 DuckDuckGo에서 검색
-    console.log('🔍 DuckDuckGo에서 검색어 검색 중...');
-    const keywords = allTrends.map(t => t.keyword);
-    const searchResults = await searchMultipleKeywords(keywords);
+    // 4. 각 국가별로 Google News에서 검색어 검색
+    console.log('🔍 Google News에서 검색어 검색 중...');
+    const allSearchResults = [];
 
-    // 국가 정보 추가
-    const enrichedSearchResults = searchResults.map((result, index) => ({
-      ...result,
-      country_code: allTrends[index]?.country_code || null
-    }));
+    for (const [countryCode, countryTrends] of Object.entries(trendsByCountry)) {
+      const countryInfo = SUPPORTED_COUNTRIES[countryCode];
+      const keywords = countryTrends.map(t => t.keyword);
+
+      console.log(`  📍 ${countryInfo.flag} ${countryInfo.name} (${countryCode}) - ${keywords.length}개 키워드`);
+
+      const searchResults = await searchMultipleGoogleNews(
+        keywords,
+        countryInfo.language,
+        countryCode
+      );
+
+      // 국가 정보 추가
+      const enrichedResults = searchResults.map((result, index) => ({
+        ...result,
+        country_code: countryCode
+      }));
+
+      allSearchResults.push(...enrichedResults);
+    }
+
+    const enrichedSearchResults = allSearchResults;
 
     // 5. 검색 결과 저장
     console.log('💾 검색 결과 저장 중...');
