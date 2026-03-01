@@ -1,0 +1,13 @@
+node_modules
+.git
+.gitignore
+debug.log
+.env.local
+*.log
+.DS_Store
+.next
+.vercel
+.cache
+DEBUG.md
+test-*.js
+.claude
