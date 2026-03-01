@@ -7,17 +7,18 @@
     "build": "echo 'No build needed'",
     "start": "node server.js",
     "debug:trends": "node debug-trends.js",
-    "test:api": "node test-api.js",
-    "postinstall": "playwright install"
+    "test:api": "node test-api.js"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^143.0.4",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.0",
     "pg": "^8.11.0",
-    "playwright": "^1.58.2"
+    "playwright-core": "^1.58.2"
   },
   "devDependencies": {
+    "playwright": "^1.58.2",
     "vercel": "^33.0.0"
   },
   "engines": {

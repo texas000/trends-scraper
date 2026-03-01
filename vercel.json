@@ -1,9 +1,6 @@
 {
-  "buildCommand": "npm install && npx playwright install --with-deps",
+  "buildCommand": "npm install",
   "outputDirectory": ".",
-  "env": {
-    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "false"
-  },
   "functions": {
     "api/**/*.js": {
       "maxDuration": 300,
