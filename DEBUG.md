@@ -141,7 +141,22 @@ node test-db.js
 
 ## Common Issues & Solutions
 
-### 1. Database Column Not Found Error
+### 1. Playwright Browser Executable Not Found
+**Error:** `browserType.launch: Executable doesn't exist at /home/...chrome-headless-shell`
+
+**Solution:**
+```bash
+npx playwright install
+```
+
+This downloads the required browser binaries. The project now has a `postinstall` script in `package.json` that will automatically run this whenever you do `npm install`.
+
+**For deployment:**
+- Ensure `npm install` runs before starting the server
+- Or run `npx playwright install` in your build process
+- The postinstall script handles this automatically
+
+### 2. Database Column Not Found Error
 **Error:** `"column \"country_code\" does not exist"`
 
 **Solution:**

@@ -1,9 +1,12 @@
 {
-  "buildCommand": "echo 'No build needed'",
+  "buildCommand": "npm install && npx playwright install",
   "outputDirectory": ".",
+  "env": {
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "false"
+  },
   "crons": [
     {
-      "path": "/api/cron/trends",
+      "path": "/api/trigger-trends",
       "schedule": "0 9 * * *"
     }
   ]
