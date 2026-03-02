@@ -8,9 +8,25 @@
     }
   },
   "crons": [
-    {
-      "path": "/api/trigger-trends",
-      "schedule": "0 9 * * *"
-    }
+    { "path": "/api/cron/KR", "schedule": "0 9 * * *" },
+    { "path": "/api/cron/US", "schedule": "3 9 * * *" },
+    { "path": "/api/cron/JP", "schedule": "6 9 * * *" },
+    { "path": "/api/cron/CN", "schedule": "9 9 * * *" },
+    { "path": "/api/cron/GB", "schedule": "12 9 * * *" },
+    { "path": "/api/cron/DE", "schedule": "15 9 * * *" },
+    { "path": "/api/cron/FR", "schedule": "18 9 * * *" },
+    { "path": "/api/cron/IN", "schedule": "21 9 * * *" },
+    { "path": "/api/cron/BR", "schedule": "24 9 * * *" },
+    { "path": "/api/cron/MX", "schedule": "27 9 * * *" },
+    { "path": "/api/cron/ES", "schedule": "30 9 * * *" },
+    { "path": "/api/cron/IT", "schedule": "33 9 * * *" },
+    { "path": "/api/cron/CA", "schedule": "36 9 * * *" },
+    { "path": "/api/cron/AU", "schedule": "39 9 * * *" },
+    { "path": "/api/cron/NL", "schedule": "42 9 * * *" },
+    { "path": "/api/cron/RU", "schedule": "45 9 * * *" },
+    { "path": "/api/cron/SG", "schedule": "48 9 * * *" },
+    { "path": "/api/cron/HK", "schedule": "51 9 * * *" },
+    { "path": "/api/cron/TW", "schedule": "54 9 * * *" },
+    { "path": "/api/cron/TH", "schedule": "57 9 * * *" }
   ]
 }
